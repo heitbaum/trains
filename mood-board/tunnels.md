@@ -1,4 +1,5 @@
 # Portals 
+- https://commons.wikimedia.org/wiki/Category:Rail_tunnel_portals_in_Japan
 
 ### Seikan
 - https://files.structurae.net/files/photos/wikipedia/Seikan_Tunnel_entrance_-_dual-gauge_track.jpg
