@@ -8,3 +8,4 @@ Touchscreen Desk Controller with ESP32 + Nextion + ESPHome!
 Touchscreen
 - https://www.hardkernel.com/shop/odroid-vu8m/
 - https://www.hardkernel.com/shop/odroid-m1-with-8gbyte-ram/
+- https://www.thingiverse.com/thing:5334147
