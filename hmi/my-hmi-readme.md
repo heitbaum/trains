@@ -15,4 +15,5 @@ https://nextion.tech/2017/12/08/nextion-hmi-upload-protocol-v1-1/
 
 rtc
 https://www.youtube.com/watch?v=nU5TgdyDOo0
+https://github.com/brian32768/Blinky/blob/main/nextion.py
 
