@@ -17,5 +17,7 @@ rtc
 - https://www.youtube.com/watch?v=nU5TgdyDOo0
 - https://github.com/brian32768/Blinky/blob/main/nextion.py
 - https://github.com/yozik04/nextion
+- https://github.com/blueskyson/pi-zero-weather/tree/main
+
 
 
