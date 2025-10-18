@@ -15,6 +15,8 @@ EX-CSB1 with EX-MotorShield8874
   - https://core-electronics.com.au/displays-screens/graphic.html
   - https://core-electronics.com.au/large-oled-i2c-display-ssd1309.html
  
+  - 128x32 132x64
+  - https://www.youtube.com/watch?v=mcCLTxX5sA4
   - 
 Accessory Support: Qwiic/STEMMA QT 3.3V, compatible I2C connector and extra I2C pin headers for all your accessories
 
