@@ -10,6 +10,10 @@ EX-CSB1 with EX-MotorShield8874
   - https://www.amazon.com/dp/B0CFF3XNX4/?th=1
   - https://www.amazon.com/dp/B08V97FYD2/?th=1
   - https://www.amazon.com/dp/B06XRBTBTB/?th=1
+  - https://core-electronics.com.au/white-i2c-oled-display-ssd1306.html
+  - https://core-electronics.com.au/gravity-2-0-inch-ips-screen-esp32-arduino-uart-i2c.html
+  - https://core-electronics.com.au/displays-screens/graphic.html
+  - https://core-electronics.com.au/large-oled-i2c-display-ssd1309.html
  
   - 
 Accessory Support: Qwiic/STEMMA QT 3.3V, compatible I2C connector and extra I2C pin headers for all your accessories
