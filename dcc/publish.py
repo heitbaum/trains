@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+# SPDX-License-Identifier: GPL-2.0-only
+# Copyright (C) 2025-present Rudi Heitbaum (rudi@heitbaum.com)
+
+import random
+import configparser
+import time
+
+from paho.mqtt import client as mqtt_client
+
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+broker_host = config['BROKER']['host']
+broker_port = int(config['BROKER']['port'])
+broker_topic = config['BROKER']['topic']
+
+# Generate a Client ID with the publish prefix.
+client_id = f'publish-{random.randint(0, 1000)}'
+# username = 'emqx'
+# password = 'public'
+
+def connect_mqtt():
+    def on_connect(client, userdata, flags, reason_code, properties):
+        if reason_code == 0:
+            print("Connected to MQTT Broker!")
+        else:
+            print("Failed to connect, return code %d\n", reason_code)
+
+    client = mqtt_client.Client(mqtt_client.CallbackAPIVersion.VERSION2, client_id)
+    # client.username_pw_set(username, password)
+    client.on_connect = on_connect
+    client.connect(broker_host, broker_port)
+    return client
+
+
+def publish(client):
+    msg_count = 1
+    while True:
+        time.sleep(1)
+        msg = f"messages: {msg_count}"
+        result = client.publish(broker_topic, msg)
+        # result: [0, 1]
+        status = result[0]
+        if status == 0:
+            print(f"Send `{msg}` to topic `{broker_topic}`")
+        else:
+            print(f"Failed to send message to topic {broker_topic}")
+        msg_count += 1
+        if msg_count > 5:
+            break
+
+
+def run():
+    client = connect_mqtt()
+    client.loop_start()
+    publish(client)
+    client.loop_stop()
+
+
+if __name__ == '__main__':
+    run()
