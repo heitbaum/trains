@@ -15,7 +15,8 @@ config.read('config.ini')
 
 broker_host = config['BROKER']['host']
 broker_port = int(config['BROKER']['port'])
-broker_topic = config['BROKER']['topic']
+#broker_topic = config['BROKER']['topic']
+broker_topic = 'trains/track/turnout/14'
 
 # Generate a Client ID with the publish prefix.
 client_id = f'publish-{random.randint(0, 1000)}'
@@ -40,7 +41,8 @@ def publish(client):
     msg_count = 1
     while True:
         time.sleep(1)
-        msg = f"messages: {msg_count}"
+        #msg = f"messages: {msg_count}"
+        msg = f"{msg_count%2}"
         result = client.publish(broker_topic, msg)
         # result: [0, 1]
         status = result[0]
