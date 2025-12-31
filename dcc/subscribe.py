@@ -82,6 +82,15 @@ def on_connect(client, userdata, flags, reason_code, properties):
         print("Failed to connect, return code %d\n", reason_code)
     client.subscribe(broker_topic) # Subscribe to a topic upon connection
 
+def on_connect_fail(client, userdata):
+    print("Connection failed:", userdata)
+
+def on_disconnect(client, userdata, disconnect_flags, reason_code, properties):
+    print("Disconnected:", reason_code, userdata)
+
+def on_log(client, userdata, level, buf):
+    print("log:", buf)
+
 # Callback function when a message is received
 def on_message(client, userdata, msg):
     #print(f"Received message: {msg.topic} - {msg.payload.decode()}")
@@ -105,10 +114,16 @@ client = mqtt_client.Client(mqtt_client.CallbackAPIVersion.VERSION2, client_id)
 
 # Assign callback functions
 client.on_connect = on_connect
+client.on_connect_fail = on_connect_fail
 client.on_message = on_message
+client.on_disconnect=on_disconnect
+client.on_log = on_log
+client.enable_logger()
+client.reconnect_delay_set(5, 30)
 
 # Connect to the MQTT broker
-client.connect(broker_host, broker_port, 60)
+ret = client.connect(broker_host, broker_port, 60)
+print("Connect Attempt:", ret)
 
 # Start the MQTT loop in a background thread
 # This handles network traffic, message processing, and automatic re-connections
@@ -139,7 +154,8 @@ if __name__ == '__main__':
     try:
         asyncio.run(manage_tracks())
         while True:
-            message = "Hello from main thread!"
+            #message = "Hello from main thread!"
+            #print(f"{message}")
             #client.publish(broker_topic, message) # Publish messages from the main thread
             #print(f"Published: {message}")
             time.sleep(5) # Simulate other work
