@@ -1,0 +1,2 @@
+cd ~/trains/dcc/serial2mqtt/build
+./serial2mqtt serial2mqtt.json -vD | grep -v -e MQTT_PUBLISH_SUCCESS -e TIMEOUT -e SERIAL_RXD
