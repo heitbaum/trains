@@ -105,9 +105,21 @@ def on_message(client, userdata, msg):
             array_id = int(turnout_id) - 10
             match int(msg.payload.decode()):
                 case 0:
-                    points[array_id].set_state(TurnoutState.CLOSED)
+                    try:
+                        points[array_id].set_state(TurnoutState.CLOSED)
+                    except BrokenPipeError:
+                        print("DCC BrokenPipeError, reconnecting.")
+                        dccex_command._client_socket.close()
+                        dccex_command._init_sockets()
+                        points[array_id].set_state(TurnoutState.CLOSED)
                 case 1:
-                    points[array_id].set_state(TurnoutState.THROWN)
+                    try:
+                        points[array_id].set_state(TurnoutState.THROWN)
+                    except BrokenPipeError:
+                        print("DCC BrokenPipeError, reconnecting.")
+                        dccex_command._client_socket.close()
+                        dccex_command._init_sockets()
+                        points[array_id].set_state(TurnoutState.THROWN)
 
 # Create an MQTT client instance
 client = mqtt_client.Client(mqtt_client.CallbackAPIVersion.VERSION2, client_id)
