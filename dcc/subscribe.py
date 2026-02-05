@@ -4,9 +4,11 @@
 # SPDX-License-Identifier: GPL-2.0-only
 # Copyright (C) 2025-present Rudi Heitbaum (rudi@heitbaum.com)
 
+
 import array
 import asyncio
 import configparser
+import os
 import random
 import signal
 import sys
@@ -14,6 +16,7 @@ import time
 import threading
 
 from enum import IntEnum
+from pathlib import Path
 
 from dcc_ex_py.DCCEX import DCCEX
 from dcc_ex_py.Helpers import ActiveState, Direction, Track, TurnoutState
@@ -24,8 +27,15 @@ from dcc_ex_py.asyncsensor.AsyncSensor import AsyncSensor
 
 from paho.mqtt import client as mqtt_client
 
+# Find the directory containing the script
+# Path(__file__) gets the path of the current script
+# .parent gets the directory containing the script
+script_dir = Path(__file__).parent
+# Join the script directory path with the config file name
+config_path = script_dir / 'config.ini'
+
 config = configparser.ConfigParser()
-config.read('config.ini')
+config.read(config_path)
 
 # get the configurations for the mqtt broker
 broker_host = config['BROKER']['host']
@@ -89,7 +99,11 @@ def on_disconnect(client, userdata, disconnect_flags, reason_code, properties):
     print("Disconnected:", reason_code, userdata)
 
 def on_log(client, userdata, level, buf):
-    print("log:", buf)
+    match buf:
+        case "Received PINGRESP" | "Sending PINGREQ":
+            pass
+        case _:
+            print("log:", buf)
 
 # Callback function when a message is received
 def on_message(client, userdata, msg):
@@ -99,6 +113,25 @@ def on_message(client, userdata, msg):
     topic_parts = msg.topic.split('/')
     # Use the match statement to handle different topic structures
     match topic_parts:
+        # Match a specific path: "trains/track/power"
+        case ['trains', 'track', 'power']:
+            match int(msg.payload.decode()):
+                case 0:
+                    try:
+                        dccex_command.track_power.power_select_track(ActiveState.OFF, Track.MAIN)
+                    except BrokenPipeError:
+                        print("DCC BrokenPipeError, reconnecting.")
+                        dccex_command._client_socket.close()
+                        dccex_command._init_sockets()
+                        dccex_command.track_power.power_select_track(ActiveState.OFF, Track.MAIN)
+                case 1:
+                    try:
+                        dccex_command.track_power.power_select_track(ActiveState.ON, Track.MAIN)
+                    except BrokenPipeError:
+                        print("DCC BrokenPipeError, reconnecting.")
+                        dccex_command._client_socket.close()
+                        dccex_command._init_sockets()
+                        dccex_command.track_power.power_select_track(ActiveState.ON, Track.MAIN)
         # Match a specific path: "trains/track/turnout"
         case ['trains', 'track', 'turnout', turnout_id]:
             #print(f"Turnout {turnout_id}: {msg.payload.decode()}")
@@ -147,9 +180,15 @@ async def turnout_fix() -> None:
     await asyncio.sleep(0.5)
     points[0].set_state(TurnoutState.THROWN)
     points[1].set_state(TurnoutState.THROWN)
+    points[2].set_state(TurnoutState.THROWN)
+    points[3].set_state(TurnoutState.THROWN)
+    points[4].set_state(TurnoutState.THROWN)
     await asyncio.sleep(1)
     points[0].set_state(TurnoutState.CLOSED)
     points[1].set_state(TurnoutState.CLOSED)
+    points[2].set_state(TurnoutState.CLOSED)
+    points[3].set_state(TurnoutState.CLOSED)
+    points[4].set_state(TurnoutState.CLOSED)
     await asyncio.sleep(1)
     print("Turnout check complete.")
 
