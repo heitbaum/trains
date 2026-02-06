@@ -1,0 +1,15 @@
+[Unit]
+Description=DCC-EX Subscribe Script Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/trains/dcc/
+ExecStart=/usr/bin/python3 /root/trains/dcc/subscribe.py
+StandardOutput=append:/var/log/subscribe-stdout.log
+StandardError=append:/var/log/subscribe-stderr.log
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
