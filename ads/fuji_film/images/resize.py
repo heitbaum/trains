@@ -1,28 +1,41 @@
 #!/usr/bin/env python
 
 from PIL import Image
+import glob
+import os
 
-# Load image
-img = Image.open("fuji_film.png").convert("RGBA")
+# Find all files matching fuji_film_??.png
+files = glob.glob("fuji_film_??.png")
 
 # Target canvas size
 target_w, target_h = 280, 240
 
-# Resize source while preserving aspect ratio
-img = img.resize((280, 210), Image.LANCZOS)
+for file in files:
+    # Load image
+    img = Image.open(file).convert("RGBA")
 
-# Create new 280x240 canvas (transparent or use white)
-#canvas = Image.new("RGBA", (target_w, target_h), (255, 255, 255, 0)) #transparent
-#canvas = Image.new("RGBA", (target_w, target_h), (255, 255, 255, 0)) #white
-canvas = Image.new("RGBA", (target_w, target_h), (0, 0, 0, 0)) #black
+    # Resize source image to 280x210
+    img = img.resize((280, 210), Image.LANCZOS)
 
-# Center image vertically
-#y_offset = (target_h - 200) // 2  # = 20
-y_offset = 5 #just a bit down
+    # Create 280x240 canvas (transparent background)
+    #canvas = Image.new("RGBA", (target_w, target_h), (255, 255, 255, 0)) #transparent
+    #canvas = Image.new("RGBA", (target_w, target_h), (255, 255, 255, 0)) #white
+    canvas = Image.new("RGBA", (target_w, target_h), (0, 0, 0, 0)) #black
 
-canvas.paste(img, (0, y_offset))
+    # Center vertically
+    #y_offset = (target_h - 200) // 2
+    y_offset = 5 #just a bit down
 
-# Save result
-canvas.save("fuji_film_280x240.png")
+    # Paste resized image
+    canvas.paste(img, (0, y_offset))
 
-print("Created 280x240 image with centered 280x200 content.")
+    # Output filename
+    base, ext = os.path.splitext(file)
+    output_file = f"{base}_280x240.png"
+
+    # Save result
+    canvas.save(output_file)
+
+    print(f"Saved: {output_file}")
+
+print("Done.")
