@@ -1,3 +1,215 @@
+DETERMINISTIC RECONSTRUCTION MODE
+
+This is NOT concept art.
+This is NOT a reinterpretation.
+This is NOT an “inspired by” neon sign.
+
+This is a locked motion-graphics reconstruction of an existing vintage Coca-Cola neon billboard animation.
+
+The renderer MUST preserve all approved geometry and choreography exactly.
+
+==================================================
+MASTER LOOK
+==================================================
+
+Authentic 1970s–1980s analog neon billboard.
+
+Visual characteristics:
+- gas neon tubes
+- additive glow
+- soft bloom
+- subtle transformer flicker
+- deep saturated Coca-Cola red
+- warm white neon
+- realistic tube falloff
+- slightly imperfect analog illumination
+
+NOT:
+- LED
+- cyberpunk
+- CGI plastic
+- synthwave
+- chrome
+- futuristic
+- glossy 3D
+- AI art reinterpretation
+
+Pure black background only.
+
+==================================================
+CAMERA
+==================================================
+
+- perfectly straight-on
+- orthographic view
+- zero perspective distortion
+- locked framing
+- identical composition every frame
+- billboard centered precisely
+
+Aspect ratio:
+4:3 only
+
+==================================================
+LOCKED BILLBOARD GEOMETRY
+==================================================
+
+DO NOT redesign any element.
+
+LOCK:
+- outer border proportions
+- Coca-Cola logo scale
+- ribbon wave geometry
+- red bar spacing
+- logo placement
+- wave placement
+- billboard proportions
+
+FORBIDDEN:
+- font substitutions
+- changing logo proportions
+- changing wave curvature
+- moving logo position
+- changing bar spacing
+- perspective warping
+- environmental additions
+- reflections
+- foreground objects
+- cinematic framing
+
+==================================================
+BILLBOARD ELEMENTS
+==================================================
+
+1. OUTER BORDER
+- thick red neon rectangle
+- rounded corners
+- consistent geometry
+- constant illumination except Frame 000
+
+2. RED NEON BARS
+- vertical red neon tubes
+- evenly spaced
+- persistent illumination layer
+- remain visible beneath all white neon
+
+IMPORTANT:
+White elements NEVER black out the red bars.
+
+3. ENJOY
+- small white neon text
+- centered above logo
+- vintage styling
+- appears after logo fade-in begins
+
+4. COCA-COLA SCRIPT
+- authentic classic Coca-Cola script
+- exact proportions
+- warm white neon tubing
+- no AI text distortion
+- no alternate font interpretation
+
+5. RIBBON WAVE
+- authentic Coca-Cola ribbon sweep
+- smooth translational movement only
+- NO morphing
+- NO stretching
+- NO procedural wave redesign
+- NO retracting left
+
+==================================================
+ANIMATION TIMELINE
+==================================================
+
+FRAME 000
+- full black
+
+FRAME 001
+- outer border only
+
+FRAMES 002–010
+- red neon bars illuminate LEFT → RIGHT
+
+FRAMES 011–014
+- Coca-Cola logo begins fading in
+- Enjoy NOT visible yet
+
+FRAMES 015–021
+- Enjoy fades in
+- full logo illuminated
+- red bars remain fully illuminated
+
+FRAMES 022–030
+- ribbon wave enters LEFT → RIGHT
+- by Frame 030 full wave visible
+
+FRAMES 031–036
+- ribbon wave exits progressively OFF RIGHT edge
+- translational motion ONLY
+
+FRAMES 037–044
+- NO wave visible
+- logo remains illuminated
+- red bars remain illuminated
+
+FRAMES 045–050
+- Coca-Cola logo extinguished
+- red bars progressively switch OFF LEFT → RIGHT
+- final illuminated bar is far RIGHT
+
+==================================================
+REGISTRATION RULES
+==================================================
+
+EVERY frame MUST:
+- align perfectly
+- share identical geometry
+- contain zero drift
+- contain zero jitter
+- contain zero scaling differences
+
+NO camera movement.
+NO frame warping.
+NO stabilization artifacts.
+
+==================================================
+CRITICAL FAILURE CONDITIONS
+==================================================
+
+REJECT OUTPUT if:
+- font changes
+- wave shape changes
+- red bars disappear behind white elements
+- center becomes blacked out
+- border drifts
+- wave appears during Frames 037–044
+- Enjoy appears during Frames 011–012
+- artifact appears above “ola”
+- wave retracts left instead of exiting right
+- frames are inconsistent
+- logo moves or scales
+- perspective distortion appears
+
+==================================================
+OUTPUT
+==================================================
+
+Generate:
+- native high-resolution PNG sequence
+- professional motion-graphics quality
+- locked-off animation
+- seamless playback
+
+Target resolution:
+4096×3072 preferred
+2048×1536 minimum
+
+Playback:
+2× slower approved timing
+
+was
+
+
 # Coca-Cola Neon Billboard — Master Production Specification
 
 ## Objective
